@@ -10,3 +10,7 @@ require("../app/app")
 // TESTS FOR SERVICES //
 
 require("./services/services.test")(angular);
+
+
+// TEST FOR STATES
+require("./states/states.test")(angular);
