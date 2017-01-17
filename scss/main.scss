@@ -1,2 +1,86 @@
+@import "./bootstrap_theme/_variables.scss";
+@import "./bootstrap_theme/_bootswatch.scss";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+
+.index-page{
+
+    //remove extra padding / margin
+    padding:0;
+    margin:0;
+
+    //set height / width
+    height: 100vh;
+    width: 100vw;
+
+    //centering
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    //jumbotron styles
+    .jumbotron{
+
+        //relative so settings-glyphicon can be absolute positioned
+        position:relative;
+
+        //settings glyphicon styles
+        .settings.glyphicon{
+
+            //position / display
+            position: absolute;
+            top:0px;
+            right:0px;
+            padding:20px;
+
+            //font
+            color:$brand-primary;
+            font-size: 2em;
+
+            cursor: pointer;
+        }
+
+        //extra padding for content that isnt btns
+        h1,p{
+            padding:20px;
+        }
+
+        //btns container styles
+        .action-btns{
+            //sizing / display
+            width:100%;
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+
+            //btns
+            a.btn{
+                margin:10px;
+                flex:1; //equal ammount of space
+            }
+        }
+
+
+    }
+
+}
+
+//implement responsivness
+@media(max-width:700px){
+
+    .index-page{
+
+        .jumbotron{
+            
+            //btn display becomes columns
+            .action-btns{
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+            }
+
+        }
+    }
+}
+
 
