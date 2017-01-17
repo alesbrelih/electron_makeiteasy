@@ -2,12 +2,24 @@
 function indexpageComponent(app){
 
     //controller
-    function indexpageController(){
+    function indexpageController(connectionService){
 
         //for referencing
         const vm = this;
 
+        //oninit
+        vm.$onInit = ()=>{
+
+            //connectedflag
+            vm.Connected = connectionService.Connected;
+
+            console.log(vm.Connected);
+
+        };
     }
+
+    //inject connection service
+    indexpageController.$inject = ["connectionService"];
 
 
     app.component("abIndexPage",{

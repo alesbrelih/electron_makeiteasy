@@ -4,13 +4,15 @@ function connectionFactoryModule(app){
     //needed modules
     const nodeDns = require("dns");
 
-    function connectionFactory($q){
+    function connectionFactory(){
 
         //returned factory
         const factory = {};
 
         // -- privates -- //
 
+        // connected flag starts at false
+        factory.Connected = false;
 
         //check for connection
         //default dns is nodeDns , injecting service
@@ -23,10 +25,16 @@ function connectionFactoryModule(app){
                  nodeDns.lookup("google.com",(err)=>{
                     //if there is error / cannot connect return false
                     if(err){
+                        //set connected flag
+                        factory.Connected = false;
+
                         resolve(false);
                     }
                     else{
                         //connection was successfull
+                        //set connected flag
+                        factory.Connected = true;
+
                         resolve(true);
                     }
                 });
@@ -39,10 +47,6 @@ function connectionFactoryModule(app){
         //return factory
         return factory;
     }
-
-    //inject promises
-    connectionFactory.$inject=["$q"];
-
     //registerfactory
     app.factory("connectionService",connectionFactory);
 
