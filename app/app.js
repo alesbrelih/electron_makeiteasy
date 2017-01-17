@@ -10,3 +10,6 @@ const app = angular.module("mainWrapper",[]);
 //register components
 require("./components/app.components")(app);
 
+//register services
+require("./services/app.service")(app);
+

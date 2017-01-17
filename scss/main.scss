@@ -25,19 +25,44 @@
         position:relative;
 
         //settings glyphicon styles
-        .settings.glyphicon{
-
+        .icons-container{
             //position / display
             position: absolute;
             top:0px;
             right:0px;
+
+            //padding for each icon
+            .glyphicon{
+                padding:20px;
+                font-size: 2em;
+                padding-left:0px !important;
+
+
+                //Settings icon
+                &.settings{
+
+                    //font
+                    color:$brand-primary;
+                    cursor: pointer;
+                }
+                //connection icon
+                &.connection{
+
+                    color:$gray;
+
+                    &.valid{
+                        color:$brand-primary;
+                    }
+
+                }
+            }
+        }
+        .settings.glyphicon{
+
+
             padding:20px;
 
-            //font
-            color:$brand-primary;
-            font-size: 2em;
 
-            cursor: pointer;
         }
 
         //extra padding for content that isnt btns
@@ -71,7 +96,7 @@
     .index-page{
 
         .jumbotron{
-            
+
             //btn display becomes columns
             .action-btns{
                 flex-direction: column;
