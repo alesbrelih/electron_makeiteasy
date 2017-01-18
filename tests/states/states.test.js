@@ -47,15 +47,10 @@ function testingStates(angular){
             //check if correct controller
             it("Home state template is valid.",function(){
 
-
                 expect(currentState.template).to.equal("<ab-index-page></ab-index-page>");
 
             });
-
         });
-
-
-
     });
 
 
