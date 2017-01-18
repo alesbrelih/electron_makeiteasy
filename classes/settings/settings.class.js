@@ -26,6 +26,12 @@ class SettingsClass{
         return this.emails;
     }
 
+    //add new email
+    addEmail(emailInfo){
+        let emailObj = new Email(emailInfo);
+        this.emails.push(emailObj);
+    }
+
 }
 
 module.exports = SettingsClass;

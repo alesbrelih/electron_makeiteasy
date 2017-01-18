@@ -40,6 +40,19 @@ function testingSettingClass(chai){
 
             expect(emailsLength).to.equal(2);
         });
+
+        it("Should have added email succesfully",function(){
+
+            //new email info
+            const email = {
+                username:"Testing",
+                password:"Testing"
+            };
+
+            settingsObject.addEmail(email);
+
+            expect(settingsObject.getEmails().length).to.equal(3);
+        })
     });
 }
 
