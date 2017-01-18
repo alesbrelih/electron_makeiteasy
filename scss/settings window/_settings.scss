@@ -1,0 +1,36 @@
+// --- styles for settings modal --- //
+ab-settings{
+
+    .modal-body{
+        .panel-body{
+            .list-group-item{
+                // list group items styles
+                div{ //container for content:
+
+                    //flexed centered row full width
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    width:100%;
+
+                    padding:5px;
+
+                    //text styles
+                    p{
+                        margin-bottom: 0px;
+
+                        flex:1;
+                    }
+
+                    //button styles
+                    button{
+                        margin-right:10px;
+                        padding:10px 15px;
+
+                    }
+                }
+            }
+        }
+    }
+
+}
