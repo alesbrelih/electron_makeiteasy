@@ -2,7 +2,7 @@
 function indexpageComponent(app){
 
     //controller
-    function indexpageController(connectionService){
+    function indexpageController(connectionService,settingsService){
 
         //for referencing
         const vm = this;
@@ -13,13 +13,17 @@ function indexpageComponent(app){
             //connectedflag
             vm.Connected = connectionService.Connected;
 
-            console.log(vm.Connected);
-
         };
+
+        vm.OpenSettingsWindow = ()=>{
+            settingsService.OpenSettingsWindow();
+        }
+
+
     }
 
     //inject connection service
-    indexpageController.$inject = ["connectionService"];
+    indexpageController.$inject = ["connectionService","settingsService"];
 
 
     app.component("abIndexPage",{
