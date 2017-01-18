@@ -9,7 +9,7 @@ function settingsServiceModule(app){
     const Settings = require("../../../classes/settings/settings.class");
 
     //settings controller
-    function settingsController(){
+    function settingsController($uibModal){
 
         //returned singleton
         let settings = {};
@@ -73,9 +73,21 @@ function settingsServiceModule(app){
             return settingsObject;
         };
 
+        //open settings window
+        settings.OpenSettingsWindow = () =>{
+            var modalInstance = $uibModal.open({
+            component: 'abSettings'
+            });
+
+            modalInstance.result.then(function () {
+                this.SaveSettingsConfig();
+            });
+        };
+
         return settings;
 
     }
+    settingsController.$inject = ["$uibModal"];
 
 
     //register service
