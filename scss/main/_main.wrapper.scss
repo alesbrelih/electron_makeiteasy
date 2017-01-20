@@ -1,0 +1,12 @@
+// --- ab main styles --- //
+ab-main{
+
+    .nav.navbar-nav.navbar-right{
+        li{
+            a.glyphicon-flash{
+                pointer-events: none;
+            }
+        }
+    }
+
+}
