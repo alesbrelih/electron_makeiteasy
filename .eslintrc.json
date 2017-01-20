@@ -13,10 +13,6 @@
         ],
         "array-callback-return": "error",
         "arrow-body-style": "off",
-        "arrow-parens": [
-            "error",
-            "always"
-        ],
         "arrow-spacing": "off",
         "block-scoped-var": "error",
         "block-spacing": "error",
@@ -26,7 +22,6 @@
         ],
         "callback-return": "error",
         "camelcase": "error",
-        "class-methods-use-this": "error",
         "comma-dangle": "error",
         "comma-spacing": "off",
         "comma-style": [
@@ -128,7 +123,6 @@
         "no-multi-spaces": "error",
         "no-multi-str": "error",
         "no-multiple-empty-lines": "off",
-        "no-negated-condition": "error",
         "no-nested-ternary": "error",
         "no-new": "error",
         "no-new-func": "error",
@@ -155,7 +149,6 @@
         "no-shadow": "off",
         "no-shadow-restricted-names": "error",
         "no-spaced-func": "error",
-        "no-sync": "error",
         "no-tabs": "error",
         "no-template-curly-in-string": "error",
         "no-ternary": "error",
@@ -172,7 +165,6 @@
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
         "no-useless-concat": "error",
-        "no-useless-constructor": "error",
         "no-useless-escape": "error",
         "no-useless-rename": "error",
         "no-var": "off",
