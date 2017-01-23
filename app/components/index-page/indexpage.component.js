@@ -11,7 +11,7 @@ function indexpageComponent(app){
         vm.$onInit = ()=>{
 
             //connectedflag
-            vm.Connected = connectionService.Connected;
+            vm.Status = connectionService.GetStatus();
 
         };
 

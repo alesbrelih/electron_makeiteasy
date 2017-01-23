@@ -7,12 +7,20 @@ function connectionFactoryModule(app){
     function connectionFactory(){
 
         //returned factory
-        const factory = {};
+        const factory = {
+
+        };
+
+        let status = {
+            connected : false
+        }
 
         // -- privates -- //
 
-        // connected flag starts at false
-        factory.Connected = false;
+        //returns object holding current status
+        factory.GetStatus =()=>{
+            return status;
+        }
 
         //check for connection
         //default dns is nodeDns , injecting service
@@ -26,14 +34,14 @@ function connectionFactoryModule(app){
                     //if there is error / cannot connect return false
                     if(err){
                         //set connected flag
-                        factory.Connected = false;
+                        status.connected = false;
 
                         resolve(false);
                     }
                     else{
                         //connection was successfull
                         //set connected flag
-                        factory.Connected = true;
+                        status.connected = true;
 
                         resolve(true);
                     }
