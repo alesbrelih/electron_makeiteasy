@@ -7,7 +7,7 @@ function completedNotesServiceModule(app){
     const CompletedNote = require("../../../classes/note/completed.note.class");
 
     //controller
-    function completedNotesServiceController(){
+    function completedNotesServiceController($rootScope){
 
         //returned singleton
         const notesFactory = {};
@@ -18,9 +18,7 @@ function completedNotesServiceModule(app){
         let db = new CompletedNotesDb();
 
         //properties for factory
-        const properties = {
-            notes:[]
-        }
+        const _notes = [];
 
 
         // --- publics --- //
@@ -34,16 +32,18 @@ function completedNotesServiceModule(app){
                 db.getCompletedNotes()
                     .then(function(notes){
 
-                        //clear array of notes
-                        while(properties.notes.length>0){
-                            properties.notes.pop()
-                        }
+                        $rootScope.$apply(function(){
+                            //clear array of notes
+                            while(_notes.length>0){
+                                _notes.pop()
+                            }
 
-                        //add new notes
-                        for(let note of notes){
-                            properties.notes.push(note);
-                        }
+                            //add new notes
+                            for(let note of notes){
+                                _notes.push(note);
+                            }
 
+                        });
                         resolve(notes);
 
                     },function(err){
@@ -122,7 +122,7 @@ function completedNotesServiceModule(app){
         }
 
         //bind properties value
-        notesFactory.Properties = properties;
+        notesFactory.Notes = _notes;
 
         //return singleton
         return notesFactory;

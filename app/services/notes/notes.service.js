@@ -199,10 +199,14 @@ function noteServiceModule(app){
         notesFactory.EditConfirm = (note,refresh,cb) =>{
 
                 dialogService.Dialog("edit","note",()=>{
-                    notesFactory.EditNote(note,refresh)
-                        .then(()=>{
+                    const editPromise = notesFactory.EditNote(note,refresh);
+
+                    //if callback needed
+                    if(cb){
+                        editPromise.then(function(){
                             cb();
-                        });
+                        })
+                    }
                 });
 
 
@@ -214,6 +218,7 @@ function noteServiceModule(app){
         notesFactory.RemoveConfirm = (id,refresh) =>{
             dialogService.Dialog("delete","note",()=>{
                 notesFactory.RemoveNote(id,refresh);
+
             });
         };
 
@@ -226,17 +231,28 @@ function noteServiceModule(app){
                 }
 
                 //add note
-                notesFactory.AddNote(noteObject,refresh)
-                    .then(()=>{
+                const addPromise = notesFactory.AddNote(noteObject,refresh);
+
+                //if callback needed
+                if(cb){
+                    addPromise.then(()=>{
                         cb();
-                    });
+                    })
+                }
             })
         };
 
-        //confirm complete
-        notesFactory.CompleteConfirm = (note,refresh) =>{
+        //confirm complete with cb option
+        notesFactory.CompleteConfirm = (note,refresh,cb) =>{
             dialogService.Dialog("complete","note",()=>{
-                notesFactory.CompleteNote(note,refresh);
+                const completePromise =notesFactory.CompleteNote(note,refresh);
+
+                //if callback needed
+                if(cb){
+                    completePromise.then(function(){
+                        cb();
+                    })
+                }
             });
         }
 

@@ -1,10 +1,14 @@
 
+
 // ---- notes component module ---- //
 
 function notesComponentModule(app){
 
+
+    const config = require("../../../config/config");
+
     //controller
-    function notesComponentController(notesService){
+    function notesComponentController(notesService,completedNotesService){
 
         //ref to controller
         const vm = this;
@@ -14,11 +18,41 @@ function notesComponentModule(app){
             //all notes
             vm.Notes = notesService.Notes;
 
+            //completed notes
+            vm.CompletedNotes = completedNotesService.Notes;
+
             //selected for edit/new var
             vm.selected = null;
 
+            //currently display active
+            vm.display = "active";
+
+            //set displayed limit
+            vm.pageSize = config.notesPageSize;
+
+            vm.maxPagesCompleted = vm.CompletedNotes.length/vm.pageSize;
+
+            vm.changePage();
+
+
+
         };
 
+
+
+        vm.changePage = ()=>{
+
+            console.log("changed page");
+
+            if(!vm.currentPage){
+                vm.currentPage = 1;
+            }
+
+            const index = (vm.currentPage-1)*vm.pageSize;
+
+            vm.CompletedNotesVisible = vm.CompletedNotes.slice(index,index+vm.pageSize);
+
+        }
 
         // --- actions --- //
 
@@ -29,7 +63,7 @@ function notesComponentModule(app){
 
         //complete
         vm.completeNote = (note) =>{
-            notesService.CompleteConfirm(note,true);
+            notesService.CompleteConfirm(note,true,vm.changePage);
         };
 
         //edit notes
@@ -66,7 +100,7 @@ function notesComponentModule(app){
         }
 
     }
-    notesComponentController.$inject = ["notesService"];
+    notesComponentController.$inject = ["notesService","completedNotesService"];
 
     app.component("abNotes",{
         controller:notesComponentController,

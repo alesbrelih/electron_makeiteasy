@@ -1,30 +1,67 @@
 <h1>Notes</h1>
 <hr>
-<div class="list-group" ng-show="vm.Notes.length > 0">
-  <a href="#" class="list-group-item" ng-repeat="note in vm.Notes">
-    <h4 class="list-group-item-heading">{{note.Description}}</h4>
+<div class="row">
 
-    <p class="list-group-item-text text-right">
-        <button type="buton" class="btn btn-success glyphicon glyphicon-check" ng-click="vm.completeNote(note)"></button>
-        <button type="buton" class="btn btn-default glyphicon glyphicon-pencil" ng-click="vm.setSelected(note)"></button>
-        <button type="buton" class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.removeNote(note.Id)"></button>
-    </p>
-  </a>
-</div>
-<hr>
+  <div class="col-md-3 col-md-push-9">
 
-<div id="add-note" class="form-group" ng-show="vm.selected == null">
-  <button class="btn btn-primary form-control" ng-click="vm.setSelected()">Add Note</button>
-</div>
-<div id="note-form" class="form-group" ng-show="vm.selected != null">
-  <div class="input-group">
-    <input type="text" placeholder="Note Description" class="form-control" ng-model="vm.selected.Description">
-    <span class="input-group-btn">
-      <button class="btn btn-primary glyphicon glyphicon-plus" type="button" ng-hide="vm.selected.Id" ng-click="vm.addNote()"></button>
-      <button class="btn btn-default glyphicon glyphicon-pencil" type="button" ng-show="vm.selected.Id" ng-click="vm.editNote()"></button>
-      <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.selected = null" type="button"></button>
-    </span>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" ng-class="{active:vm.display=='active'}"><a href="#" ng-click="vm.display='active'">Active</a></li>
+      <li role="presentation" ng-class="{active:vm.display=='completed'}"><a href="#" ng-click="vm.display='completed'">Completed</a></li>
+
+    </ul>
+    <hr class="visible-xs visible-sm">
+
   </div>
+
+  <div class="col-md-9 col-md-pull-3" ng-switch="vm.display">
+    <div class="active" ng-switch-when="active">
+      <h3>Active</h3>
+      <hr>
+      <div class="list-group" ng-show="vm.Notes.length > 0">
+        <a href="#" class="list-group-item" ng-repeat="note in vm.Notes">
+          <h4 class="list-group-item-heading">{{note.Description}}</h4>
+
+          <p class="list-group-item-text text-right">
+              <button type="buton" class="btn btn-success glyphicon glyphicon-check" ng-click="vm.completeNote(note)"></button>
+              <button type="buton" class="btn btn-default glyphicon glyphicon-pencil" ng-click="vm.setSelected(note)"></button>
+              <button type="buton" class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.removeNote(note.Id)"></button>
+          </p>
+        </a>
+      </div>
+      <hr>
+
+      <div id="add-note" class="form-group" ng-show="vm.selected == null">
+        <button class="btn btn-primary form-control" ng-click="vm.setSelected()">Add Note</button>
+      </div>
+      <div id="note-form" class="form-group" ng-show="vm.selected != null">
+        <div class="input-group">
+          <input type="text" placeholder="Note Description" class="form-control" ng-model="vm.selected.Description">
+          <span class="input-group-btn">
+            <button class="btn btn-primary glyphicon glyphicon-plus" type="button" ng-hide="vm.selected.Id" ng-click="vm.addNote()"></button>
+            <button class="btn btn-default glyphicon glyphicon-pencil" type="button" ng-show="vm.selected.Id" ng-click="vm.editNote()"></button>
+            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.selected = null" type="button"></button>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="completed" ng-switch-when="completed">
+      <h3>Completed</h3>
+      <hr>
+      <div class="list-group" ng-show="vm.CompletedNotes.length > 0">
+        <a href="#" class="list-group-item" ng-repeat="note in vm.CompletedNotesVisible">
+          <h4 class="list-group-item-heading">{{note.Description}}</h4>
+
+          <p class="list-group-item-text text-right">
+              {{note.Date}}
+          </p>
+        </a>
+      </div>
+      <ul uib-pagination total-items="vm.CompletedNotes.length" ng-model="vm.currentPage" ng-change="vm.changePage()" items-per-page="8" class="pagination-sm"></ul>
+    </div>
+  </div>
+
 </div>
 
 

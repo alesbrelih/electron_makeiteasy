@@ -23,6 +23,9 @@ function appConfig(app){
             resolve:{
                 notes:["notesService",function(notesService){
                     return notesService.GetNotes();
+                }],
+                completed:["completedNotesService",function(completedNotesService){
+                    return completedNotesService.GetCompletedNotes();
                 }]
             }
         });
