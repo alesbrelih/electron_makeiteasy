@@ -15,8 +15,8 @@
 
   <div class="col-md-9 col-md-pull-3" ng-switch="vm.display">
     <div class="active" ng-switch-when="active">
-      <h3>Active</h3>
-      <hr>
+      <h3 ng-show="vm.Notes.length>0">Active</h3>
+      <hr ng-show="vm.Notes.length>0">
       <div class="list-group" ng-show="vm.Notes.length > 0">
         <a href="#" class="list-group-item" ng-repeat="note in vm.Notes">
           <h4 class="list-group-item-heading">{{note.Description}}</h4>
@@ -28,7 +28,7 @@
           </p>
         </a>
       </div>
-      <hr>
+      <hr ng-show="vm.Notes.length>0">
 
       <div id="add-note" class="form-group" ng-show="vm.selected == null">
         <button class="btn btn-primary form-control" ng-click="vm.setSelected()">Add Note</button>

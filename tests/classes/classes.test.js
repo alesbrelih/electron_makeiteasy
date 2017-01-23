@@ -14,6 +14,9 @@ function testClassesModule(){
     //db manipulation classes
     require("./db manipulation/db.manipulation.test")();
 
+    //test reminder class input verification
+    require("./reminder_class/reminder.class")(chai);
+
 }
 
 module.exports = testClassesModule;
