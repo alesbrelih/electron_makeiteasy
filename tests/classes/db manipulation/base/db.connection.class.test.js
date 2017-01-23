@@ -56,7 +56,7 @@ function testDbConnection(chai){
                     throw err;
                 }
                 const val = row["count(*)"];
-                expect(val).to.equal(1);
+                expect(val).to.equal(2);
                 done();
             });
             db.close();

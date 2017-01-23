@@ -12,7 +12,11 @@ function prepareTables(dbpath,cb){
     // prepare table //
     const sql = "CREATE TABLE NOTE("+
                 "ID INT PRIMARY KEY NOT NULL,"+
-                "DESCRIPTION TEXT NOT NULL);";
+                "DESCRIPTION TEXT NOT NULL);"+
+                "CREATE TABLE COMPLETED_NOTES("+
+                "ID INT PRIMARY KEY NOT NULL,"+
+                "DESCRIPTION TEXT NOT NULL,"+
+                "DATE TEXT NOT NULL);";
 
 
     //connect to file
@@ -21,7 +25,7 @@ function prepareTables(dbpath,cb){
     db.serialize(function(){
 
          //run sql to create table
-        db.run(sql,function(){
+        db.exec(sql,function(){
             if(cb){
                 cb();
             }
@@ -64,7 +68,10 @@ class DbConnection{
             }
             else{
                 //callback if it exists
-                callback();
+                if(callback){
+                    callback();
+                }
+
             }
         });
     }
