@@ -1,0 +1,44 @@
+
+    #add-note,#note-form{
+        &.ng-hide-add{
+            animation: blur_out;
+            animation-duration: 200ms;
+        }
+        &.ng-hide-remove{
+            animation: blur_in;
+            animation-duration: 900ms;
+
+            //animation-delay: 300ms;
+        }
+    }
+
+    #note-form{
+        .input-group-btn{
+            .glyphicon{
+                top:0px;
+            }
+        }
+    }
+
+@keyframes blur_out{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform:translateY(100px);
+    }
+
+}
+
+@keyframes blur_in{
+    0%{
+        transform:translateY(100px);
+        opacity: 0;
+    }
+    100%{
+        transform:translateY(0);
+        opacity: 1;
+    }
+}

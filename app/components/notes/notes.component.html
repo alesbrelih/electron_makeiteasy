@@ -1,0 +1,30 @@
+<h1>Notes</h1>
+<hr>
+<div class="list-group" ng-show="vm.Notes.length > 0">
+  <a href="#" class="list-group-item" ng-repeat="note in vm.Notes">
+    <h4 class="list-group-item-heading">{{note.Description}}</h4>
+
+    <p class="list-group-item-text text-right">
+        <button type="buton" class="btn btn-success glyphicon glyphicon-check" ng-click="vm.completeNote(note)"></button>
+        <button type="buton" class="btn btn-default glyphicon glyphicon-pencil" ng-click="vm.setSelected(note)"></button>
+        <button type="buton" class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.removeNote(note.Id)"></button>
+    </p>
+  </a>
+</div>
+<hr>
+
+<div id="add-note" class="form-group" ng-show="vm.selected == null">
+  <button class="btn btn-primary form-control" ng-click="vm.setSelected()">Add Note</button>
+</div>
+<div id="note-form" class="form-group" ng-show="vm.selected != null">
+  <div class="input-group">
+    <input type="text" placeholder="Note Description" class="form-control" ng-model="vm.selected.Description">
+    <span class="input-group-btn">
+      <button class="btn btn-primary glyphicon glyphicon-plus" type="button" ng-hide="vm.selected.Id" ng-click="vm.addNote()"></button>
+      <button class="btn btn-default glyphicon glyphicon-pencil" type="button" ng-show="vm.selected.Id" ng-click="vm.editNote()"></button>
+      <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.selected = null" type="button"></button>
+    </span>
+  </div>
+</div>
+
+

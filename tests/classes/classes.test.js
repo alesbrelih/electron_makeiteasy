@@ -11,6 +11,9 @@ function testClassesModule(){
     //get settings class test
     require("./settings class/settings.class.test")(chai);
 
+    //db manipulation classes
+    require("./db manipulation/db.manipulation.test")();
+
 }
 
 module.exports = testClassesModule;
