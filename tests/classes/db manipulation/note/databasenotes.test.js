@@ -142,8 +142,6 @@ function databasenoteTests(chai,chaiaspromised){
 
         });
 
-
-
         //should be able to get note
         it("Should be able to get a single note from id",function(done){
 
@@ -239,6 +237,39 @@ function databasenoteTests(chai,chaiaspromised){
             })
 
         });
+
+        //should get next id
+        it("Should return next id in notes",function(done){
+
+            //add new
+            const newNote = new Note(customNoteJson);
+
+            //add note promise
+            const addPromise = dbnotes.addNote(newNote);
+
+            addPromise.then(function(){
+
+                const getIdPromise = dbnotes.getNextId();
+
+                getIdPromise.then(function(id){
+
+                    try{
+                        expect(id).to.equal(2);
+                        done();
+                    }
+                    catch(err){
+                        done(err);
+                    }
+
+                },function(err){
+                    done(err);
+                });
+
+            },
+            function(err){
+                done(err);
+            })
+        })
 
     })
 

@@ -164,6 +164,8 @@ class DatabaseNotes extends DbConnection{
 
     //add note to db
     addNote(note){
+
+
         const dbNotes = this;
 
         const promise = new Promise(function(resolve,reject){
@@ -247,6 +249,49 @@ class DatabaseNotes extends DbConnection{
             //Close db
             db.close();
         })
+
+        //return promise
+        return promise;
+    }
+
+    //get next note id
+    getNextId(){
+
+        //object ref
+        const noteDb = this;
+
+        const promise = new Promise(function(resolve,reject){
+
+            //create db ref
+            const db = new sqlite.Database(noteDb.dbpath);
+
+            db.serialize(function(){
+
+                //sql
+                const sql = "SELECT MAX(ID) FROM NOTE";
+
+                //statement
+                const statement = db.prepare(sql);
+
+                statement.get(function(err,row){
+                    if(err){
+                        reject(err);
+                    }
+                    else{
+                        const nextId = row["MAX(ID)"]+1;
+                        resolve(nextId);
+                    }
+                });
+
+                statement.finalize();
+
+
+            });
+
+            //close db connection
+            db.close();
+
+        });
 
         //return promise
         return promise;
