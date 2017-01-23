@@ -16,7 +16,12 @@ function prepareTables(dbpath,cb){
                 "CREATE TABLE COMPLETED_NOTES("+
                 "ID INT PRIMARY KEY NOT NULL,"+
                 "DESCRIPTION TEXT NOT NULL,"+
-                "DATE TEXT NOT NULL);";
+                "DATE TEXT NOT NULL);"+
+                "CREATE TABLE REMINDER("+
+                "ID INT PRIMARY KEY NOT NULL,"+
+                "MINUTE INT NOT NULL,"+
+                "HOUR INT NOT NULL,"+
+                "DAYSOFWEEK TEXT NOT NULL);";
 
 
     //connect to file
