@@ -4,7 +4,7 @@
 
 function appConfig(app){
 
-    app.config(function($stateProvider,$urlRouterProvider){
+    app.config(function($stateProvider){
 
         $stateProvider.state("home",{
 
@@ -13,7 +13,18 @@ function appConfig(app){
             resolve:["connectionService",function(connectionService){
                 return connectionService.CheckConnection();
             }]
-
+        })
+        .state("main",{
+            abstract:true,
+            template:"<ab-main></ab-main>"
+        })
+        .state("main.notes",{
+            template:"<ab-notes></ab-notes>",
+            resolve:{
+                notes:["notesService",function(notesService){
+                    return notesService.GetNotes();
+                }]
+            }
         });
 
     });
