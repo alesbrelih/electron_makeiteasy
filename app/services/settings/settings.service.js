@@ -56,8 +56,6 @@ function settingsServiceModule(app){
                 //stringify object
                 const stringifyed = JSON.stringify(saved);
 
-                console.log(stringifyed);
-
                 //write file
                 fs.writeFile("config/settings.json", stringifyed, (err) => {
                     if (err) {

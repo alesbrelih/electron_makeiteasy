@@ -41,9 +41,7 @@ function notesComponentModule(app){
 
 
         vm.changePage = ()=>{
-
-            console.log("changed page");
-
+            
             if(!vm.currentPage){
                 vm.currentPage = 1;
             }
