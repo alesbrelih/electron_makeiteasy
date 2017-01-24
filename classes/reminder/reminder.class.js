@@ -3,22 +3,28 @@
 
 class Reminder{
 
-    constructor(minutes,hour){
+    constructor(minute,hour){
         //minute - int (0-59)
         //hour - int (0-23)
-
-        this.Hour = hour;
-        this.Minutes = minutes;
+        this.id = -1;
+        this.hour = hour;
+        this.minute = minute;
+        this.daysofweekArray = [];
+        this.daysofweek = "";
 
     }
 
     // --- getters --- //
 
+    get Id(){
+        return this.id;
+    }
+
     get Hour(){
         return this.hour;
     }
-    get Minutes(){
-        return this.minutes;
+    get Minute(){
+        return this.minute;
     }
     get Days(){
         return this.daysofweek;
@@ -28,6 +34,9 @@ class Reminder{
     }
 
     // --- setters --- //
+    set Id(id_){
+        this.id = id_;
+    }
     set Hour(hour_){
         if(hour_ >= 0 && hour_<24){
             this.hour = hour_;
@@ -38,9 +47,9 @@ class Reminder{
 
     }
 
-    set Minutes(minutes_){
-        if(minutes_ >= 0 && minutes_< 60){
-            this.minutes = minutes_;
+    set Minute(minute_){
+        if(minute_ >= 0 && minute_< 60){
+            this.minute = minute_;
         }
         else{
             throw new Error("Minutes are not in a valid format.");
@@ -48,8 +57,13 @@ class Reminder{
 
     }
 
+    set DaysArray(daysarray_){
+        this.daysofweekArray = daysarray_;
+    }
+
     //set days from array
     setDaysFromArray(daysArray_){
+
         //transform array to string value aswell (for db value)
         let daysString = "";
         for(let dayInt of daysArray_){
@@ -62,19 +76,14 @@ class Reminder{
                     daysString += dayInt.toString();
                 }
                 else{
-                    daysString += `, ${dayInt.toString()}`;
+                    daysString += `,${dayInt.toString()}`;
                 }
             }
 
         }
-
-        //save both
-
         //save string
         this.daysofweek = daysString;
 
-        //save array
-        this.daysofweekArray = daysArray_;
     }
 
     //set days from string
