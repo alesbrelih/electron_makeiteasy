@@ -15,6 +15,9 @@ function dbManipulationTests(){
     //testing completed notes db class
     require("./note/database.completednotes.test")(chai,customPath)
 
+    //testing reminders db class
+    require("./reminder/db.reminder.class.test")(chai,customPath);
+
 }
 
 module.exports = dbManipulationTests;
