@@ -15,3 +15,6 @@ require("./states/states.test")(angular);
 
 // TEST FOR CLASSES
 require("./classes/classes.test")();
+
+//test cron manager
+require("./cron_manager/cron.manager.test")();
