@@ -1,6 +1,11 @@
 
 // -- Reminder class definition -- //
 
+//function set numbers to 2 digit format
+function twoDigit(num){
+    return num>9? String(num) : `0${num}`;
+}
+
 class Reminder{
 
     constructor(minute,hour){
@@ -100,6 +105,13 @@ class Reminder{
         else{
             throw new Error("Days of week is not in correct format");
         }
+    }
+
+    //get cron time
+    getCronTimeString(){
+        //cron string
+        return `* ${twoDigit(this.Minute)} ${twoDigit(this.Hour)} * * ${this.Days}`;
+
     }
 
 }

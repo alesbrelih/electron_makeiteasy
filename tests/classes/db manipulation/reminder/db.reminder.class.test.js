@@ -171,7 +171,6 @@ function dbReminderClassTest(chai,custompath){
                                             try{
 
                                                 const changed = reminders[0];
-                                                console.log(reminders);
                                                 expect(changed.Minute).to.equal(50);
                                                 done();
                                             }
