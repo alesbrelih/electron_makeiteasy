@@ -11,6 +11,7 @@ function cronManagerTest(){
         const custompath = "sqlite/testingDb.sqlite";
         const fs = require("fs");
         const Reminder = require("../../classes/reminder/reminder.class");
+        const reminderDb = require("../../classes/db_manipulation/reminder/db.reminder.class");
 
         //test object
         let reminderObj = new Reminder(30,10);
@@ -39,7 +40,7 @@ function cronManagerTest(){
         })
 
         it("Get reminders method should return an array.",function(done){
-            cronmanager.GetReminders()
+            cronmanager.GetCronJobs()
                 .then(function(reminders){
                     try{
                         expect(reminders).to.not.equal(null);
@@ -55,26 +56,77 @@ function cronManagerTest(){
                 })
         });
 
-        it("Should be able to add a cronjob",function(done){
+        it("Initialize method should work even with no db data",function(done){
 
-            cronmanager.AddCronJob(reminderObj)
-                .then(()=>{
+            cronmanager.InitializeCronJobs()
+                .then(function(){
                     try{
-                        const cronHolderArray = cronmanager.CronHolders();
-                        expect(cronHolderArray.length).to.equal(1);
+                        const cronArray = cronmanager.CronHolders();
+                        expect(cronArray).to.not.equal(null);
+                        expect(cronArray).to.be.instanceOf(Array);
                         done();
                     }
                     catch(err){
                         done(err);
                     }
-                },(err)=>{
+                },function(err){
                     done(err);
+                });
+
+        });
+
+        it("Initialize method should work even with db data",function(done){
+
+            let db = new reminderDb(custompath,null);
+
+            db.addReminder(reminderObj)
+                .then(()=>{
+                    cronmanager.InitializeCronJobs()
+                        .then(function(){
+                            try{
+                                const cronArray = cronmanager.CronHolders();
+                                expect(cronArray).to.not.equal(null);
+                                expect(cronArray).to.be.instanceOf(Array);
+                                done();
+                            }
+                            catch(err){
+                                done(err);
+                            }
+                        },function(err){
+                            done(err);
+                        });
                 })
+                .catch(err=>{
+                    done(err);
+                });
+        });
+
+        it("Should be able to add a cronjob",function(done){
+
+            cronmanager.GetCronJobs()
+                .then(()=>{
+                    cronmanager.AddCronJob(reminderObj)
+                        .then(()=>{
+                            try{
+                                const cronHolderArray = cronmanager.CronHolders();
+                                expect(cronHolderArray.length).to.equal(1);
+                                done();
+                            }
+                            catch(err){
+                                done(err);
+                            }
+                        },(err)=>{
+                            done(err);
+                        })
+                        })
+                        .catch(err=>{
+                            done(err);
+                        });
         });
 
         it("Should be able to delete a cronjob",function(done){
 
-            cronmanager.GetReminders()
+            cronmanager.GetCronJobs()
                 .then(function(){
                     cronmanager.AddCronJob(reminderObj)
                         .then(function(){
@@ -104,7 +156,7 @@ function cronManagerTest(){
 
         it("Should be able to edit a cronjob",function(done){
 
-            cronmanager.GetReminders()
+            cronmanager.GetCronJobs()
                 .then(function(){
 
                     cronmanager.AddCronJob(reminderObj)
@@ -138,10 +190,7 @@ function cronManagerTest(){
                 });
 
         });
-
     });
-
 }
-
 
 module.exports = cronManagerTest;

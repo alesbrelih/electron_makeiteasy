@@ -90,7 +90,7 @@ const cronManager = ((function () {
             //get reminders
             //gets reminders
             //refresh is bool that indicates if public array should be refreshed
-            GetReminders: () => {
+            GetCronJobs: () => {
 
                 //reinit reminders
                 cronHolders = [];
@@ -105,10 +105,18 @@ const cronManager = ((function () {
                             for(let reminder of remindersDb){
                                 let cronHolder = new CronHolder();
                                 cronHolder.Reminder = reminder;
+
+                                //create crop object
+                                const cronReminder = createCronJobObject(cronHolder.Reminder);
+
+                                //push to array of cronReminders
+                                cronHolder.CronJob = cronReminder;
+
+                                cronHolders.push(cronHolder);
                             }
 
                             //resolve promise
-                            resolve(remindersDb);
+                            resolve(cronHolders);
 
                         }, (err) => {
                             reject(err);
@@ -121,33 +129,6 @@ const cronManager = ((function () {
 
             },
 
-            //sets reminder
-            SetCronJobs: () => {
-
-                //promise
-                const promise = new Promise((resolve,reject)=>{
-
-                    //foreach of db reminders
-                    for (let cronHolder of cronHolders) {
-
-                        try{
-                            //create crop object
-                            const cronReminder = createCronJobObject(cronHolder.Reminder);
-
-                            //push to array of cronReminders
-                            cronHolder.CronJob = cronReminder;
-                        }
-                        catch(err){
-                            //if err when creating cron job
-                            reject(err);
-                            break;
-                        }
-                    }
-                    resolve();
-                });
-                //return promise
-                return promise;
-            },
 
             //run reminders
             RunCronJobs:() => {
@@ -197,15 +178,12 @@ const cronManager = ((function () {
                 //Create promise
                 const promise = new Promise((resolve,reject)=>{
 
-                    cronSingleton.GetReminders()
+                    cronSingleton.GetCronJobs()
                         .then(()=>{
-                            cronSingleton.SetCronJobs()
+                            cronSingleton.RunCronJobs()
                                 .then(()=>{
-                                    cronSingleton.RunCronJobs()
-                                        .then(()=>{
-                                            resolve();
-                                        })
-                                })
+                                    resolve();
+                                });
                         })
                         .catch((err)=>{
                             reject(err);
@@ -261,9 +239,6 @@ const cronManager = ((function () {
 
                     //object representing it
                     let cronHolder = cronHolders[index];
-
-                    //console.log(index,cronHolder);
-
 
                     if(cronHolder.CronJob.running === true){
                         //try to stop the job
