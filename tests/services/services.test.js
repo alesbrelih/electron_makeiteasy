@@ -18,8 +18,10 @@ function servicesTest(angular){
     require("./notes service/notes.service.test")(angular,chai,custompath);
 
     //completed notes service
-    require("./notes service/completed.notes.service.tests")(angular,chai,custompath)
+    require("./notes service/completed.notes.service.tests")(angular,chai,custompath);
 
+    //reminder service test
+    require("./reminder service/reminder.service.test")(angular,chai,custompath)
 }
 
 //export services test

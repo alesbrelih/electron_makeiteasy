@@ -15,6 +15,9 @@ function registerAllServicesModule(app){
 
     //register dialog service
     require("./dialog/dialog.service")(app);
+
+    //register
+    require("./reminder/reminder.service")(app);
 }
 
 //export module that register all services

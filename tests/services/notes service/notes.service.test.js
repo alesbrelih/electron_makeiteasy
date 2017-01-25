@@ -177,7 +177,7 @@ function noteserviceTestModule(angular,chai,custompath){
                     done(err);
                 })
 
-        });
+        })
 
             },function(err){
                 done(err);

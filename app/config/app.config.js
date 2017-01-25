@@ -10,9 +10,14 @@ function appConfig(app){
 
             url:"/",
             template:"<ab-index-page></ab-index-page>",
-            resolve:["connectionService",function(connectionService){
-                return connectionService.CheckConnection();
-            }]
+            resolve:{
+                connection:["connectionService",function(connectionService){
+                    return connectionService.CheckConnection();
+                }],
+                reminder:["reminderService",function(reminderService){
+                    return reminderService.InitializeCronJobs();
+                }]
+            }
         })
         .state("main",{
             abstract:true,
