@@ -19,6 +19,7 @@ function prepareTables(dbpath,cb){
                 "DATE TEXT NOT NULL);"+
                 "CREATE TABLE REMINDER("+
                 "ID INT PRIMARY KEY NOT NULL,"+
+                "DESCRIPTION TEXT NOT NULL,"+
                 "MINUTE INT NOT NULL,"+
                 "HOUR INT NOT NULL,"+
                 "DAYSOFWEEK TEXT NOT NULL);";

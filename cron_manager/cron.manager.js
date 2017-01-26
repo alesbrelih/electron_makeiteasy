@@ -8,7 +8,6 @@ const RemindersDb = require("../classes/db_manipulation/reminder/db.reminder.cla
 //cronjob holder object
 const CronHolder = require("../classes/cron_holder/cron.holder.class");
 
-
 //cronjob
 const CronJob = require("cron").CronJob;
 

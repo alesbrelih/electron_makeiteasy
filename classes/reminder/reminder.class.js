@@ -8,10 +8,11 @@ function twoDigit(num){
 
 class Reminder{
 
-    constructor(minute,hour){
+    constructor(description,minute,hour){
         //minute - int (0-59)
         //hour - int (0-23)
         this.id = -1;
+        this.description = description;
         this.hour = hour;
         this.minute = minute;
         this.daysofweekArray = [];
@@ -24,7 +25,9 @@ class Reminder{
     get Id(){
         return this.id;
     }
-
+    get Description(){
+        return this.description;
+    }
     get Hour(){
         return this.hour;
     }
@@ -41,6 +44,9 @@ class Reminder{
     // --- setters --- //
     set Id(id_){
         this.id = id_;
+    }
+    set Description(description_){
+        this.description = description_;
     }
     set Hour(hour_){
         if(hour_ >= 0 && hour_<24){

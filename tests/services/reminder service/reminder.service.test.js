@@ -11,7 +11,7 @@ function reminderServiceTestModule(angular,chai,custompath){
         const expect = chai.expect;
         const Reminder = require("../../../classes/reminder/reminder.class")
 
-        let reminderObj = new Reminder(30,10);
+        let reminderObj = new Reminder("TEST",30,10);
         let daysArray = [1,2,3,4];
         reminderObj.DaysArray = daysArray;
 

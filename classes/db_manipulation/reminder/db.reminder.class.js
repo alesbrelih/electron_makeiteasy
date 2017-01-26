@@ -46,7 +46,7 @@ class RemindersDb extends DbConn{
                     }
                     else{
 
-                        const reminderObj = new Reminder(row.MINUTE,row.HOUR);
+                        const reminderObj = new Reminder(row.DESCRIPTION,row.MINUTE,row.HOUR);
                         reminderObj.setDaysFromString(row.DAYSOFWEEK);
                         reminderObj.Id = row.ID;
                         reminders.push(reminderObj);
@@ -85,7 +85,7 @@ class RemindersDb extends DbConn{
 
         reminderObj.setDaysFromArray(reminderObj.DaysArray);
 
-        const sql = "INSERT INTO REMINDER(ID,MINUTE,HOUR,DAYSOFWEEK) VALUES(?,?,?,?)";
+        const sql = "INSERT INTO REMINDER(ID,DESCRIPTION,MINUTE,HOUR,DAYSOFWEEK) VALUES(?,?,?,?,?)";
 
 
 
@@ -104,7 +104,7 @@ class RemindersDb extends DbConn{
 
 
             //exex
-            statement.run([reminderObj.Id,reminderObj.Minute,reminderObj.Hour,reminderObj.Days],function(err){
+            statement.run([reminderObj.Id,reminderObj.Description,reminderObj.Minute,reminderObj.Hour,reminderObj.Days],function(err){
                 if(err){
                     reject(err);
                 }
@@ -219,7 +219,7 @@ class RemindersDb extends DbConn{
         const self = this;
 
         //sql string
-        const sql = "UPDATE REMINDER SET HOUR=?, MINUTE=?, DAYSOFWEEK=? WHERE ID=?";
+        const sql = "UPDATE REMINDER SET DESCRIPTION=?, HOUR=?, MINUTE=?, DAYSOFWEEK=? WHERE ID=?";
 
         //Set days string
         reminderObj.setDaysFromArray(reminderObj.DaysArray);
@@ -236,7 +236,7 @@ class RemindersDb extends DbConn{
                 const statement = db.prepare(sql);
 
                 //exec
-                statement.run([reminderObj.Hour,reminderObj.Minute,reminderObj.Days,reminderObj.Id],function(err){
+                statement.run([reminderObj.Description,reminderObj.Hour,reminderObj.Minute,reminderObj.Days,reminderObj.Id],function(err){
                     if(err){
                         reject(err);
                     }

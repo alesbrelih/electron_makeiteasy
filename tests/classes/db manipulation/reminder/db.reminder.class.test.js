@@ -69,7 +69,7 @@ function dbReminderClassTest(chai,custompath){
         it("Should be able to add a new reminder",function(done){
 
             //set object
-            let reminderObj = new Reminder(30,10);
+            let reminderObj = new Reminder("TEST",30,10);
             let daysArray = [1,2,3,4];
             reminderObj.DaysArray = daysArray;
 
@@ -85,6 +85,7 @@ function dbReminderClassTest(chai,custompath){
 
                                         const reminder = reminders[0];
                                         expect(reminders.length).to.equal(1);
+                                        expect(reminder.Description).to.equal("TEST");
                                         expect(reminder.Minute).to.equal(30);
                                         expect(reminder.Days).to.equal("1,2,3,4");
                                         done();
@@ -107,7 +108,7 @@ function dbReminderClassTest(chai,custompath){
         it("Should be able to remove a reminder from db",function(done){
 
             //set object
-            let reminderObj = new Reminder(30,10);
+            let reminderObj = new Reminder("TEST",30,10);
             let daysArray = [1,2,3,4];
             reminderObj.DaysArray = daysArray;
 
@@ -153,7 +154,7 @@ function dbReminderClassTest(chai,custompath){
         it("Should be able to edit a reminder",function(done){
 
             //set object
-            let reminderObj = new Reminder(30,10);
+            let reminderObj = new Reminder("TEST",30,10);
             let daysArray = [1,2,3,4];
             reminderObj.DaysArray = daysArray;
 
